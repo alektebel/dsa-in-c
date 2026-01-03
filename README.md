@@ -86,6 +86,10 @@ make
 # The library will be created at: lib/libdsa.a
 # Object files will be in: build/
 
+# Build and run the example program
+make example
+./example
+
 # Clean build artifacts
 make clean
 
@@ -116,6 +120,17 @@ To link against the library:
 ```bash
 gcc -o myapp myapp.c -I. -L./lib -ldsa
 ```
+
+### Example Program
+
+An example program (`example.c`) is included to demonstrate how to use the library:
+
+```bash
+make example
+./example
+```
+
+This will show basic usage of various data structures and algorithms.
 
 ## Implementation Status
 

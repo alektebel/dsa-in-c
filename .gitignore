@@ -6,6 +6,9 @@ lib/
 *.so
 *.dylib
 
+# Example executable
+example
+
 # Editor files
 *.swp
 *.swo

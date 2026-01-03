@@ -81,8 +81,13 @@ $(BUILD_DIR)/sync_%.o: $(SYNC_DIR)/%.c
 # Clean
 .PHONY: clean
 clean:
-	rm -rf $(BUILD_DIR) $(LIB_DIR)
+	rm -rf $(BUILD_DIR) $(LIB_DIR) example
 	@echo "Cleaned build artifacts"
+
+# Example program
+example: $(LIBRARY) example.c
+	$(CC) $(CFLAGS) -o example example.c -I. -L$(LIB_DIR) -ldsa
+	@echo "Example program built: ./example"
 
 # Help
 .PHONY: help
@@ -91,6 +96,7 @@ help:
 	@echo "=================="
 	@echo "Targets:"
 	@echo "  all     - Build the DSA library (default)"
+	@echo "  example - Build the example program"
 	@echo "  clean   - Remove build artifacts"
 	@echo "  help    - Show this help message"
 	@echo ""
