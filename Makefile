@@ -14,6 +14,10 @@ HASH_DIR = hash
 SEARCH_DIR = search_algorithms
 STRING_DIR = string_matching
 SYNC_DIR = synchronization
+OPTIMIZATION_DIR = optimization
+ML_DIR = ml
+CRYPTO_DIR = crypto
+QUANTUM_DIR = quantum
 BUILD_DIR = build
 LIB_DIR = lib
 
@@ -25,6 +29,10 @@ HASH_SRC = $(wildcard $(HASH_DIR)/*.c)
 SEARCH_SRC = $(wildcard $(SEARCH_DIR)/*.c)
 STRING_SRC = $(wildcard $(STRING_DIR)/*.c)
 SYNC_SRC = $(wildcard $(SYNC_DIR)/*.c)
+OPTIMIZATION_SRC = $(wildcard $(OPTIMIZATION_DIR)/*.c)
+ML_SRC = $(wildcard $(ML_DIR)/*.c)
+CRYPTO_SRC = $(wildcard $(CRYPTO_DIR)/*.c)
+QUANTUM_SRC = $(wildcard $(QUANTUM_DIR)/*.c)
 
 # Object files
 TREES_OBJ = $(TREES_SRC:$(TREES_DIR)/%.c=$(BUILD_DIR)/trees_%.o)
@@ -34,8 +42,12 @@ HASH_OBJ = $(HASH_SRC:$(HASH_DIR)/%.c=$(BUILD_DIR)/hash_%.o)
 SEARCH_OBJ = $(SEARCH_SRC:$(SEARCH_DIR)/%.c=$(BUILD_DIR)/search_%.o)
 STRING_OBJ = $(STRING_SRC:$(STRING_DIR)/%.c=$(BUILD_DIR)/string_%.o)
 SYNC_OBJ = $(SYNC_SRC:$(SYNC_DIR)/%.c=$(BUILD_DIR)/sync_%.o)
+OPTIMIZATION_OBJ = $(OPTIMIZATION_SRC:$(OPTIMIZATION_DIR)/%.c=$(BUILD_DIR)/optimization_%.o)
+ML_OBJ = $(ML_SRC:$(ML_DIR)/%.c=$(BUILD_DIR)/ml_%.o)
+CRYPTO_OBJ = $(CRYPTO_SRC:$(CRYPTO_DIR)/%.c=$(BUILD_DIR)/crypto_%.o)
+QUANTUM_OBJ = $(QUANTUM_SRC:$(QUANTUM_DIR)/%.c=$(BUILD_DIR)/quantum_%.o)
 
-ALL_OBJ = $(TREES_OBJ) $(LISTS_OBJ) $(HEAPS_OBJ) $(HASH_OBJ) $(SEARCH_OBJ) $(STRING_OBJ) $(SYNC_OBJ)
+ALL_OBJ = $(TREES_OBJ) $(LISTS_OBJ) $(HEAPS_OBJ) $(HASH_OBJ) $(SEARCH_OBJ) $(STRING_OBJ) $(SYNC_OBJ) $(OPTIMIZATION_OBJ) $(ML_OBJ) $(CRYPTO_OBJ) $(QUANTUM_OBJ)
 
 # Library
 LIBRARY = $(LIB_DIR)/libdsa.a
@@ -78,6 +90,18 @@ $(BUILD_DIR)/string_%.o: $(STRING_DIR)/%.c
 $(BUILD_DIR)/sync_%.o: $(SYNC_DIR)/%.c
 	$(CC) $(CFLAGS) -I$(SYNC_DIR) -c $< -o $@
 
+$(BUILD_DIR)/optimization_%.o: $(OPTIMIZATION_DIR)/%.c
+	$(CC) $(CFLAGS) -I$(OPTIMIZATION_DIR) -c $< -o $@
+
+$(BUILD_DIR)/ml_%.o: $(ML_DIR)/%.c
+	$(CC) $(CFLAGS) -I$(ML_DIR) -c $< -o $@
+
+$(BUILD_DIR)/crypto_%.o: $(CRYPTO_DIR)/%.c
+	$(CC) $(CFLAGS) -I$(CRYPTO_DIR) -c $< -o $@
+
+$(BUILD_DIR)/quantum_%.o: $(QUANTUM_DIR)/%.c
+	$(CC) $(CFLAGS) -I$(QUANTUM_DIR) -c $< -o $@
+
 # Clean
 .PHONY: clean
 clean:
@@ -114,3 +138,7 @@ info:
 	@echo "  Search: $(SEARCH_SRC)"
 	@echo "  String: $(STRING_SRC)"
 	@echo "  Sync: $(SYNC_SRC)"
+	@echo "  Optimization: $(OPTIMIZATION_SRC)"
+	@echo "  ML: $(ML_SRC)"
+	@echo "  Crypto: $(CRYPTO_SRC)"
+	@echo "  Quantum: $(QUANTUM_SRC)"

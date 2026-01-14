@@ -28,12 +28,35 @@ DSA-in-C/
 │   ├── binary_search.h/.c   # Binary search variants
 │   ├── depth_first_search.h/.c   # DFS for graph traversal
 │   ├── breadth_first_search.h/.c # BFS for shortest paths
-│   └── merge_sort_list.h/.c # Merge sort for linked lists
+│   ├── merge_sort_list.h/.c # Merge sort for linked lists
+│   ├── dijkstra.h/.c        # Dijkstra's shortest path algorithm
+│   └── astar.h/.c           # A* pathfinding algorithm
 ├── string_matching/          # String matching algorithms
 │   ├── kmp_string_matching.h/.c  # Knuth-Morris-Pratt algorithm
 │   └── boyer_moore.h/.c     # Boyer-Moore pattern matching
-└── synchronization/          # Synchronization primitives
-    └── semaphores_spin_locks.h/.c  # Semaphores and spin locks
+├── synchronization/          # Synchronization primitives
+│   └── semaphores_spin_locks.h/.c  # Semaphores and spin locks
+├── optimization/             # Optimization algorithms
+│   ├── genetic_algorithm.h/.c     # Genetic algorithm
+│   ├── ant_colony.h/.c           # Ant colony optimization
+│   ├── simulated_annealing.h/.c  # Simulated annealing
+│   ├── whale_optimization.h/.c   # Whale optimization algorithm
+│   ├── gradient_descent.h/.c     # Gradient descent
+│   ├── conjugate_gradient.h/.c   # Conjugate gradient method
+│   ├── newton_method.h/.c        # Newton's method with Hessian
+│   ├── linear_programming.h/.c   # Linear programming (Simplex)
+│   └── integer_programming.h/.c  # Integer programming (Branch and Bound)
+├── ml/                       # Machine learning algorithms
+│   ├── linear_regression.h/.c    # Linear regression
+│   ├── logistic_regression.h/.c  # Logistic regression
+│   ├── decision_tree.h/.c        # Decision trees (CART)
+│   └── svm.h/.c                  # Support vector machines
+├── crypto/                   # Cryptographic algorithms
+│   ├── sha256.h/.c          # SHA-256 hash function
+│   └── ecdsa.h/.c           # ECDSA digital signatures
+└── quantum/                  # Quantum algorithms (classical simulations)
+    ├── grover.h/.c          # Grover's search algorithm
+    └── shor.h/.c            # Shor's factoring algorithm
 ```
 
 ## Data Structures and Algorithms Included
@@ -60,6 +83,8 @@ DSA-in-C/
 - **Depth First Search**: Graph traversal with cycle detection and topological sort
 - **Breadth First Search**: Shortest path in unweighted graphs and bipartite checking
 - **Merge Sort on Lists**: Efficient in-place sorting for linked lists
+- **Dijkstra's Algorithm**: Shortest path algorithm for weighted graphs
+- **A* Search**: Informed search algorithm with heuristics for optimal pathfinding
 
 ### String Matching
 - **Knuth-Morris-Pratt**: Linear-time pattern matching with failure function
@@ -70,6 +95,32 @@ DSA-in-C/
 - **Spin Locks**: Busy-wait locks for short critical sections
 - **Read-Write Locks**: Multiple readers or single writer
 - **Barriers**: Synchronization point for multiple threads
+
+### Optimization Algorithms
+- **Genetic Algorithm**: Evolutionary optimization inspired by natural selection
+- **Ant Colony Optimization**: Swarm intelligence based on ant foraging behavior
+- **Simulated Annealing**: Probabilistic optimization inspired by metallurgy
+- **Whale Optimization**: Meta-heuristic based on humpback whale hunting
+- **Gradient Descent**: First-order optimization with momentum support
+- **Conjugate Gradient**: Efficient method for quadratic optimization and linear systems
+- **Newton's Method**: Second-order optimization using Hessian matrix
+- **Linear Programming**: Simplex and dual simplex methods for LP problems
+- **Integer Programming**: Branch and bound for integer constrained optimization
+
+### Machine Learning
+- **Linear Regression**: Linear models for continuous target prediction
+- **Logistic Regression**: Binary classification with sigmoid activation
+- **Decision Trees**: Hierarchical models using CART algorithm
+- **Support Vector Machines**: Maximum margin classification with kernel support
+- Note: Evolutionary and swarm algorithms are covered in the optimization section
+
+### Cryptography
+- **SHA-256**: Secure Hash Algorithm from SHA-2 family
+- **ECDSA**: Elliptic Curve Digital Signature Algorithm for authentication
+
+### Quantum Algorithms (Classical Simulations)
+- **Grover's Algorithm**: Quantum search with quadratic speedup
+- **Shor's Algorithm**: Quantum factoring algorithm for breaking RSA
 
 ## Building the Library
 
@@ -150,6 +201,9 @@ These data structures and algorithms are used in:
 - **Networking**: Routing tables, packet filtering, connection management
 - **Compilers**: Symbol tables, syntax trees, optimization
 - **System Programming**: Resource management, concurrent access control
+- **Machine Learning**: Model training, optimization, prediction
+- **Cryptography**: Secure communications, digital signatures, data integrity
+- **Scientific Computing**: Numerical optimization, simulation, quantum computing research
 
 ## Contributing
 
