@@ -43,7 +43,9 @@ DSA-in-C/
 │   ├── whale_optimization.h/.c   # Whale optimization algorithm
 │   ├── gradient_descent.h/.c     # Gradient descent
 │   ├── conjugate_gradient.h/.c   # Conjugate gradient method
-│   └── newton_method.h/.c        # Newton's method with Hessian
+│   ├── newton_method.h/.c        # Newton's method with Hessian
+│   ├── linear_programming.h/.c   # Linear programming (Simplex)
+│   └── integer_programming.h/.c  # Integer programming (Branch and Bound)
 ├── ml/                       # Machine learning algorithms
 │   ├── linear_regression.h/.c    # Linear regression
 │   ├── logistic_regression.h/.c  # Logistic regression
@@ -102,6 +104,8 @@ DSA-in-C/
 - **Gradient Descent**: First-order optimization with momentum support
 - **Conjugate Gradient**: Efficient method for quadratic optimization and linear systems
 - **Newton's Method**: Second-order optimization using Hessian matrix
+- **Linear Programming**: Simplex and dual simplex methods for LP problems
+- **Integer Programming**: Branch and bound for integer constrained optimization
 
 ### Machine Learning
 - **Linear Regression**: Linear models for continuous target prediction
