@@ -15,8 +15,9 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <limits.h>
+#include <float.h>
 
-#define ASTAR_INFINITY INT_MAX
+#define ASTAR_INFINITY DBL_MAX
 
 // Heuristic function type (estimates cost from node to goal)
 typedef double (*heuristic_func_t)(size_t node, size_t goal, void *data);

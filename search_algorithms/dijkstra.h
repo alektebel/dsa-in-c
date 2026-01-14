@@ -15,8 +15,9 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <limits.h>
+#include <float.h>
 
-#define DIJKSTRA_INFINITY INT_MAX
+#define DIJKSTRA_INFINITY DBL_MAX
 
 // Graph representation for Dijkstra
 typedef struct {

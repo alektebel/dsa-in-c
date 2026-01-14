@@ -11,6 +11,12 @@ QuantumState* grover_state_create(size_t num_qubits) {
     QuantumState *state = (QuantumState*)malloc(sizeof(QuantumState));
     if (!state) return NULL;
     
+    // Check for potential overflow
+    if (num_qubits >= 32) {
+        free(state);
+        return NULL;  // Too many qubits for practical simulation
+    }
+    
     state->num_qubits = num_qubits;
     state->state_size = (size_t)1 << num_qubits;  // 2^num_qubits
     

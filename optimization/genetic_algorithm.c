@@ -77,6 +77,8 @@ void ga_mutate(Chromosome *chromosome, double mutation_rate,
 
 void ga_result_free(GAResult *result) {
     if (!result) return;
-    ga_chromosome_free(&result->best_chromosome);
+    if (result->best_chromosome.genes) {
+        free(result->best_chromosome.genes);
+    }
     free(result);
 }
