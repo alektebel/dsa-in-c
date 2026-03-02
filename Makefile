@@ -18,6 +18,9 @@ OPTIMIZATION_DIR = optimization
 ML_DIR = ml
 CRYPTO_DIR = crypto
 QUANTUM_DIR = quantum
+COMPRESSION_DIR = compression
+CACHE_OBLIVIOUS_DIR = cache_oblivious
+FAULT_TOLERANT_DIR = fault_tolerant
 BUILD_DIR = build
 LIB_DIR = lib
 
@@ -33,6 +36,9 @@ OPTIMIZATION_SRC = $(wildcard $(OPTIMIZATION_DIR)/*.c)
 ML_SRC = $(wildcard $(ML_DIR)/*.c)
 CRYPTO_SRC = $(wildcard $(CRYPTO_DIR)/*.c)
 QUANTUM_SRC = $(wildcard $(QUANTUM_DIR)/*.c)
+COMPRESSION_SRC = $(wildcard $(COMPRESSION_DIR)/*.c)
+CACHE_OBLIVIOUS_SRC = $(wildcard $(CACHE_OBLIVIOUS_DIR)/*.c)
+FAULT_TOLERANT_SRC = $(wildcard $(FAULT_TOLERANT_DIR)/*.c)
 
 # Object files
 TREES_OBJ = $(TREES_SRC:$(TREES_DIR)/%.c=$(BUILD_DIR)/trees_%.o)
@@ -46,8 +52,11 @@ OPTIMIZATION_OBJ = $(OPTIMIZATION_SRC:$(OPTIMIZATION_DIR)/%.c=$(BUILD_DIR)/optim
 ML_OBJ = $(ML_SRC:$(ML_DIR)/%.c=$(BUILD_DIR)/ml_%.o)
 CRYPTO_OBJ = $(CRYPTO_SRC:$(CRYPTO_DIR)/%.c=$(BUILD_DIR)/crypto_%.o)
 QUANTUM_OBJ = $(QUANTUM_SRC:$(QUANTUM_DIR)/%.c=$(BUILD_DIR)/quantum_%.o)
+COMPRESSION_OBJ = $(COMPRESSION_SRC:$(COMPRESSION_DIR)/%.c=$(BUILD_DIR)/compression_%.o)
+CACHE_OBLIVIOUS_OBJ = $(CACHE_OBLIVIOUS_SRC:$(CACHE_OBLIVIOUS_DIR)/%.c=$(BUILD_DIR)/cache_oblivious_%.o)
+FAULT_TOLERANT_OBJ = $(FAULT_TOLERANT_SRC:$(FAULT_TOLERANT_DIR)/%.c=$(BUILD_DIR)/fault_tolerant_%.o)
 
-ALL_OBJ = $(TREES_OBJ) $(LISTS_OBJ) $(HEAPS_OBJ) $(HASH_OBJ) $(SEARCH_OBJ) $(STRING_OBJ) $(SYNC_OBJ) $(OPTIMIZATION_OBJ) $(ML_OBJ) $(CRYPTO_OBJ) $(QUANTUM_OBJ)
+ALL_OBJ = $(TREES_OBJ) $(LISTS_OBJ) $(HEAPS_OBJ) $(HASH_OBJ) $(SEARCH_OBJ) $(STRING_OBJ) $(SYNC_OBJ) $(OPTIMIZATION_OBJ) $(ML_OBJ) $(CRYPTO_OBJ) $(QUANTUM_OBJ) $(COMPRESSION_OBJ) $(CACHE_OBLIVIOUS_OBJ) $(FAULT_TOLERANT_OBJ)
 
 # Library
 LIBRARY = $(LIB_DIR)/libdsa.a
@@ -102,6 +111,15 @@ $(BUILD_DIR)/crypto_%.o: $(CRYPTO_DIR)/%.c
 $(BUILD_DIR)/quantum_%.o: $(QUANTUM_DIR)/%.c
 	$(CC) $(CFLAGS) -I$(QUANTUM_DIR) -c $< -o $@
 
+$(BUILD_DIR)/compression_%.o: $(COMPRESSION_DIR)/%.c
+	$(CC) $(CFLAGS) -I$(COMPRESSION_DIR) -c $< -o $@
+
+$(BUILD_DIR)/cache_oblivious_%.o: $(CACHE_OBLIVIOUS_DIR)/%.c
+	$(CC) $(CFLAGS) -I$(CACHE_OBLIVIOUS_DIR) -c $< -o $@
+
+$(BUILD_DIR)/fault_tolerant_%.o: $(FAULT_TOLERANT_DIR)/%.c
+	$(CC) $(CFLAGS) -I$(FAULT_TOLERANT_DIR) -c $< -o $@
+
 # Clean
 .PHONY: clean
 clean:
@@ -142,3 +160,6 @@ info:
 	@echo "  ML: $(ML_SRC)"
 	@echo "  Crypto: $(CRYPTO_SRC)"
 	@echo "  Quantum: $(QUANTUM_SRC)"
+	@echo "  Compression: $(COMPRESSION_SRC)"
+	@echo "  Cache-Oblivious: $(CACHE_OBLIVIOUS_SRC)"
+	@echo "  Fault-Tolerant: $(FAULT_TOLERANT_SRC)"
