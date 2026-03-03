@@ -15,10 +15,19 @@ DSA-in-C/
 │   ├── bplus_tree.h/.c      # B+ Trees for databases and file systems
 │   ├── interval_tree.h/.c   # Interval trees for scheduling and geometry
 │   ├── red_black_tree.h/.c  # Red-Black trees for balanced search
-│   └── radix_tree.h/.c      # Radix trees for IP routing and paths
+│   ├── radix_tree.h/.c      # Radix trees for IP routing and paths
+│   ├── van_emde_boas.h/.c   # van Emde Boas trees (O(log log U) successor)
+│   ├── y_fast_trie.h/.c     # y-fast tries (O(log log U), O(n) space)
+│   ├── fusion_tree.h/.c     # Fusion trees (O(log_w n) search)
+│   ├── splay_tree.h/.c      # Splay trees (self-adjusting, working-set)
+│   ├── trie.h/.c            # Character trie and binary trie
+│   ├── lca.h/.c             # LCA and Range Minimum Query (RMQ)
+│   └── succinct.h/.c        # Succinct rank/select and balanced-paren trees
 ├── lists/                    # List data structures
 │   ├── priority_sorted_list.h/.c  # Priority sorted lists for scheduling
-│   └── bit_array.h/.c       # Bit arrays for efficient set operations
+│   ├── bit_array.h/.c       # Bit arrays for efficient set operations
+│   ├── move_to_front.h/.c   # Move-to-front list and MTF transform
+│   └── ordered_file.h/.c    # Ordered-file maintenance (packed-memory array)
 ├── heaps/                    # Heap data structures
 │   └── priority_heap.h/.c   # Priority heaps for task scheduling
 ├── hash/                     # Hash-based structures
@@ -33,7 +42,20 @@ DSA-in-C/
 │   └── astar.h/.c           # A* pathfinding algorithm
 ├── string_matching/          # String matching algorithms
 │   ├── kmp_string_matching.h/.c  # Knuth-Morris-Pratt algorithm
-│   └── boyer_moore.h/.c     # Boyer-Moore pattern matching
+│   ├── boyer_moore.h/.c     # Boyer-Moore pattern matching
+│   ├── suffix_tree.h/.c     # Suffix trees (Ukkonen's O(n) construction)
+│   └── suffix_array.h/.c    # Suffix arrays with LCP (SA-IS + Kasai)
+├── compression/              # Compression algorithms
+│   ├── huffman.h/.c         # Huffman coding (optimal prefix-free codes)
+│   ├── arithmetic_coding.h/.c   # Arithmetic coding (near-entropy compression)
+│   └── bwt.h/.c             # Burrows-Wheeler Transform + inverse
+├── cache_oblivious/          # Cache-oblivious data structures
+│   ├── cache_oblivious_list.h/.c # Cache-oblivious linked list
+│   ├── funnel_sort.h/.c     # Funnelsort (cache-oblivious O(n log n) sort)
+│   └── funnel_heap.h/.c     # Funnelheap (cache-oblivious priority queue)
+├── fault_tolerant/           # Fault-tolerant data structures
+│   ├── fault_tolerant_stack.h/.c # Stack resilient to δ memory faults
+│   └── fault_tolerant_list.h/.c  # Linked list resilient to δ memory faults
 ├── synchronization/          # Synchronization primitives
 │   └── semaphores_spin_locks.h/.c  # Semaphores and spin locks
 ├── optimization/             # Optimization algorithms
@@ -66,13 +88,23 @@ DSA-in-C/
 - **Interval Trees**: Specialized trees for storing intervals and querying overlaps
 - **Red-Black Trees**: Self-balancing BSTs used in Linux kernel for scheduling and memory management
 - **Radix Trees**: Space-optimized prefix trees for IP routing and file paths
+- **van Emde Boas Trees** *(Lecture 1–3)*: O(log log U) successor/predecessor for integer universes. Use cases: IP routing tables, OS process scheduling, event calendar systems
+- **y-fast Tries** *(Lecture 2)*: O(log log U) operations with O(n) space via x-fast hash layer + local BSTs. Use cases: memory-constrained routers, database integer indexes, sensor timestamp stores
+- **Fusion Trees** *(Lecture 4)*: B-tree with O(1) node search via word-level parallelism; O(log_w n) per query. Use cases: integer sorting pipelines, compiler symbol tables, packet classification
+- **Splay Trees** *(Lecture 7)*: Self-adjusting BST with working-set property; amortized O(log n). Use cases: cache-friendly symbol tables, link-cut trees for network flow, rope data structures
+- **Tries (character and binary)** *(Lectures 10, 12)*: Digital search trees branching per character/bit. Use cases: auto-complete/spell check, IP longest-prefix matching, DNA sequence indexing
+- **LCA and Range Minimum Query** *(Lectures 10–11)*: O(n) preprocessing, O(1) LCA queries via Euler tour + sparse table. Use cases: suffix tree queries, XML/JSON document processing, Git merge-base computation
+- **Succinct Data Structures** *(Lecture 12)*: Bit-vector rank/select in O(n/log n) extra bits; succinct ordered-rooted trees via balanced parentheses. Use cases: compressed inverted indexes, wavelet trees for genome browsers, FM-index for compressed full-text search
 
 ### Lists and Arrays
 - **Priority Sorted Lists**: Sorted lists for mutex wait queues and driver queues
 - **Bit Arrays**: Space-efficient arrays for set operations and bitmaps
+- **Move-to-Front List** *(Lectures 5–6)*: Self-organizing list with competitive ratio 2; also the MTF byte transform for compression preprocessing. Use cases: CPU cache/LRU replacement, adaptive Huffman/bzip2 compression, recently-used menus
+- **Ordered-File Maintenance** *(Lecture 14)*: Packed-memory array maintaining n elements in O(1) order queries; O(log² n) amortized insert. Use cases: cache-oblivious B-tree leaf layer, persistent sorted arrays, list labeling for order-maintenance
 
 ### Heaps
 - **Priority Heap**: Binary heap for O(log n) priority queue operations
+- **Funnelheap** *(Lecture 17)*: Cache-oblivious priority queue with optimal O(log N / B) amortized cache misses per operation. Use cases: external-memory Dijkstra, discrete-event simulation, k-way external merge sort
 
 ### Hash Structures
 - **Hash Functions**: Multiple hash algorithms (DJB2, FNV-1a, MurmurHash, Jenkins, CRC32)
@@ -85,10 +117,27 @@ DSA-in-C/
 - **Merge Sort on Lists**: Efficient in-place sorting for linked lists
 - **Dijkstra's Algorithm**: Shortest path algorithm for weighted graphs
 - **A* Search**: Informed search algorithm with heuristics for optimal pathfinding
+- **Funnelsort** *(Lecture 17)*: Cache-oblivious O(n log n) sort; optimal cache misses at all memory levels. Use cases: external sort in databases, cache-efficient parallel sorting, scientific simulation data pipelines
 
 ### String Matching
 - **Knuth-Morris-Pratt**: Linear-time pattern matching with failure function
 - **Boyer-Moore**: Efficient pattern matching with bad character and good suffix rules
+- **Suffix Trees** *(Lecture 10)*: Compressed trie of all suffixes; O(n) construction (Ukkonen's algorithm). Use cases: full-text search, bioinformatics read mapping, LZ77/78 compression
+- **Suffix Arrays** *(Lecture 11)*: Sorted suffix index with LCP array; O(n) via SA-IS + Kasai. Use cases: grep/Lucene full-text search, DNA genome assembly, plagiarism detection
+
+### Compression *(Lecture 13)*
+- **Huffman Coding**: Optimal prefix-free variable-length code; minimum expected codeword length. Use cases: JPEG/PNG/DEFLATE, fax compression (ITU-T T.4/T.6), MP3/AAC audio
+- **Arithmetic Coding**: Near-entropy coder representing a message as a single interval. Use cases: JPEG 2000 / JBIG2 (MQ coder), H.264/H.265 CABAC, bzip3/ZPAQ high-compression archives
+- **Burrows-Wheeler Transform (BWT)**: Reversible permutation grouping similar characters for compression. Use cases: bzip2 file compression, FM-index/BWA DNA alignment, genome assembly repeat masking
+
+### Cache-Oblivious Structures *(Lectures 14–18)*
+- **Cache-Oblivious Linked List** *(Lecture 15)*: Nodes embedded in a packed-memory array for O(N/B) sequential scan. Use cases: in-memory DB table scans, cache-oblivious B-tree leaf layer, streaming graph processing
+- **Funnelsort** *(Lecture 17)*: see Search and Sort above
+- **Funnelheap** *(Lecture 17)*: see Heaps above
+
+### Fault-Tolerant Data Structures *(Lecture 19)*
+- **Fault-Tolerant Stack**: Stack with magic/checksum cells; correct under up to δ memory faults. Use cases: spacecraft/embedded systems with radiation hardening, NVM persistent undo-logs, Intel SGX secure enclave stacks
+- **Fault-Tolerant Linked List**: Linked list with per-node checksums and redundant next pointers. Use cases: fault-tolerant file system metadata, safety-critical RTOS task queues, NVM write-ahead log recovery
 
 ### Synchronization
 - **Semaphores**: Counting semaphores for resource management
@@ -112,7 +161,6 @@ DSA-in-C/
 - **Logistic Regression**: Binary classification with sigmoid activation
 - **Decision Trees**: Hierarchical models using CART algorithm
 - **Support Vector Machines**: Maximum margin classification with kernel support
-- Note: Evolutionary and swarm algorithms are covered in the optimization section
 
 ### Cryptography
 - **SHA-256**: Secure Hash Algorithm from SHA-2 family
@@ -157,8 +205,20 @@ Each data structure and algorithm has a header file with function declarations a
 
 ```c
 #include "trees/red_black_tree.h"
+#include "trees/van_emde_boas.h"
+#include "trees/splay_tree.h"
+#include "trees/trie.h"
+#include "trees/lca.h"
+#include "trees/succinct.h"
 #include "hash/hash_table.h"
 #include "search_algorithms/binary_search.h"
+#include "string_matching/suffix_tree.h"
+#include "string_matching/suffix_array.h"
+#include "compression/huffman.h"
+#include "compression/bwt.h"
+#include "cache_oblivious/funnel_sort.h"
+#include "cache_oblivious/funnel_heap.h"
+#include "fault_tolerant/fault_tolerant_stack.h"
 
 // Create and use data structures
 RBTree *tree = rb_tree_create();
@@ -225,6 +285,18 @@ The implementations are based on well-known algorithms from:
 - "Introduction to Algorithms" by Cormen, Leiserson, Rivest, and Stein
 - Linux Kernel source code
 - Various computer science textbooks and papers
+- MIT 6.897 Advanced Data Structures (Spring 2003) lecture notes:
+  - Lecture 1–3: van Emde Boas trees, y-fast tries, RAMBO model
+  - Lecture 4: Fusion trees (Fredman & Willard 1993)
+  - Lectures 5–6: Move-to-front, self-organizing lists (Sleator & Tarjan 1985)
+  - Lecture 7: Splay trees, optimal BSTs (Sleator & Tarjan 1985)
+  - Lectures 8–9: Unified / working-set structures, Wilber's lower bound
+  - Lecture 10–11: Suffix trees (Ukkonen 1995), suffix arrays, LCA (Bender & Farach-Colton 2000)
+  - Lecture 12: Succinct data structures, rank/select (Jacobson 1989)
+  - Lecture 13: Huffman coding, arithmetic coding, Burrows-Wheeler transform (1994)
+  - Lecture 14: Ordered-file maintenance, cache-oblivious model
+  - Lectures 15–18: Cache-oblivious linked lists, Funnelsort, Funnelheap (Frigo et al. 1999)
+  - Lecture 19: Fault-tolerant data structures (Finocchi & Italiano 2004)
 
 ## Contact
 
